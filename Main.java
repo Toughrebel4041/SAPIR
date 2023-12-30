@@ -3,15 +3,9 @@ public class Main {
     public static TreeMap<Integer, DataPasien> Data = new TreeMap<>();
     public static List<DataPasien> Repository = new ArrayList<>();
     Scanner inputData = new Scanner(System.in);
-    
-    
-    
-
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
         DataPasien dp = new DataPasien(NoPasien, NamaPasien, Diagnosa, LokasiKasur);
-
+        Scanner input = new Scanner(System.in);
         boolean mainMenu = true;
         System.out.println("\nWelcome to SAPIR");
 
