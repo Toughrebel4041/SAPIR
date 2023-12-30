@@ -3,11 +3,15 @@ public class Main {
     public static TreeMap<Integer, DataPasien> Data = new TreeMap<>();
     public static List<DataPasien> Repository = new ArrayList<>();
     Scanner inputData = new Scanner(System.in);
-    DataPasien dp = new DataPasien();
+    
+    
+    
+
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        
+        DataPasien dp = new DataPasien(NoPasien, NamaPasien, Diagnosa, LokasiKasur);
+
         boolean mainMenu = true;
         System.out.println("\nWelcome to SAPIR");
 
@@ -38,7 +42,7 @@ public class Main {
 
                 case 4:
                     System.out.println("Hapus data pasien");
-
+                    
                 case 5:
                     mainMenu = false;                    
                 default:
@@ -47,7 +51,8 @@ public class Main {
         } while (mainMenu != false);
     }
 
-    @Override
+    
+    //Method
     public void addNewPatient(){
         System.out.println("Masukkan nama Pasien: ");
         String nama = inputData.next("");
@@ -59,8 +64,18 @@ public class Main {
         String lokasiKasur = inputData.next("");
         Data.put(ID, new DataPasien(ID, nama, diagnosa, lokasiKasur));
     }
+    
+    public void deletePatient(){
+        System.out.println("Masukkan ID Pasien: ");
+        int ID = inputData.nextInt();
+        Data.remove(ID);
+    }
+    
+    public void searchID(){
+        
+    }  
 
     public void searchName(){
-    
+        
     }
 }
