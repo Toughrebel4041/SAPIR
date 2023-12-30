@@ -1,75 +1,150 @@
-import java.util.*;
-public class Main {
-    public static TreeMap<Integer, DataPasien> Data = new TreeMap<>();
-    public static List<DataPasien> Repository = new ArrayList<>();
-    Scanner inputData = new Scanner(System.in);
-    public static void main(String[] args) {
-        DataPasien dp = new DataPasien(NoPasien, NamaPasien, Diagnosa, LokasiKasur);
-        Scanner input = new Scanner(System.in);
-        boolean mainMenu = true;
-        System.out.println("\nWelcome to SAPIR");
 
-        do{
-            System.out.println("1. Cari Data Pasien dengan ID");
-            System.out.println("2. Cari Data Pasien dengan Nama");
+/* Raihan Sultan Pasha Basuki
+ * SAPIR Project (Sistem Administrasi Pasien Rawat Inap)
+ * ESQ Business School | Computer Science 2022
+ * 2210130006
+ * Mata Kuliah: Algoritma dan Struktur Data
+ * Final Project
+ */
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        TreeMap<Integer, DataPasien> dataPasienMap = new TreeMap<>();
+
+        Scanner scanner = new Scanner(System.in);
+
+        int choice;
+        do {
+            System.out.println("Selamat datang di SAPIR! Asisten praktis untuk Administrasi Rumah Sakit.");
+            System.out.println("Menu:");
+            System.out.println("1. Cari data pasien dengan NoPasien");
+            System.out.println("2. Cari data pasien dengan NamaPasien");
             System.out.println("3. Tambah Data Pasien Baru");
-            System.out.println("4. Hapus Data Pasien");
-            System.out.println("5. Keluar");
-            System.out.println("\nPilihan Anda: ");
-            int menuSelect = input.nextInt();
-            switch (menuSelect) {
+            System.out.println("4. Hapus Data Pasien Baru");
+            System.out.println("5. Print Seluruh Data Pasien");
+            System.out.println("6. Print Data Pasien dengan NoPasien ke atas");
+            System.out.println("7. Keluar");
+            System.out.print("Pilih menu (1-7): ");
+            choice = scanner.nextInt();
+            System.out.println("\n");
+
+            switch (choice) {
                 case 1:
-                    System.out.println("Masukkan nama Pasien: ");
-                    String nama = input.next("");
-                    
+                    // Cari data pasien dengan NoPasien
+                    System.out.print("Masukkan NoPasien: ");
+                    int searchNoPasien = scanner.nextInt();
+                    DataPasien foundPasien = dataPasienMap.get(searchNoPasien);
+                    if (foundPasien != null) {
+                        System.out.println("Data Pasien Ditemukan:");
+                        printDataPasien(foundPasien);
+                    } else {
+                        System.out.println("Data Pasien tidak ditemukan.");
+                    }
+                    System.out.println("\n");
                     break;
-            
+
                 case 2:
-                    System.out.println("Masukkan ID Pasien: ");
-                    int ID = input.nextInt();
-                break;
+                    // Cari data pasien dengan NamaPasien
+                    System.out.print("Masukkan NamaPasien: ");
+                    scanner.nextLine(); // Consume newline character
+                    String searchNamaPasien = scanner.nextLine();
+                    boolean dataFound = false;
+                    for (DataPasien pasien : dataPasienMap.values()) {
+                        if (pasien.getNamaPasien().equalsIgnoreCase(searchNamaPasien)) {
+                            printDataPasien(pasien);
+                            dataFound = true;
+                        }
+                    }
+                    System.out.println("\n");
+                    if (!dataFound) {
+                        System.out.println("Data Pasien tidak ditemukan.");
+                    }
+                    System.out.println("\n");
+                    break;
 
                 case 3:
-                    System.out.println("Tambah data Pasien baru");
+                    // Tambah Data Pasien Baru
+                    System.out.println("Masukkan data pasien baru:");
+                    System.out.print("Nama Pasien: ");
+                    scanner.nextLine(); // Consume newline character
+                    String newNamaPasien = scanner.nextLine();
+                    System.out.print("No Pasien: ");
+                    int newNoPasien = scanner.nextInt();
+                    System.out.print("Diagnosa: ");
+                    scanner.nextLine(); // Consume newline character
+                    String newDiagnosa = scanner.nextLine();
+                    System.out.print("Lokasi Kasur: ");
+                    String newLokasiKasur = scanner.nextLine();
 
-                break;
+                    DataPasien newPasien = new DataPasien(newNamaPasien, newNoPasien, newDiagnosa, newLokasiKasur);
+                    dataPasienMap.put(newNoPasien, newPasien);
+                    System.out.println("Data Pasien berhasil ditambahkan.");
+                    System.out.println("\n");
+                    break;
 
                 case 4:
-                    System.out.println("Hapus data pasien");
-                    
+                    // Hapus Data Pasien Baru
+                    System.out.print("Masukkan NoPasien untuk menghapus: ");
+                    int deleteNoPasien = scanner.nextInt();
+                    DataPasien deletedPasien = dataPasienMap.remove(deleteNoPasien);
+                    if (deletedPasien != null) {
+                        System.out.println("Data Pasien berhasil dihapus:");
+                        printDataPasien(deletedPasien);
+                    } else {
+                        System.out.println("Data Pasien tidak ditemukan.");
+                    }
+                    System.out.println("\n");
+                    break;
+
                 case 5:
-                    mainMenu = false;                    
+                    // Print Seluruh Data Pasien
+                    System.out.println("Seluruh Data Pasien:");
+                    for (DataPasien pasien : dataPasienMap.values()) {
+                        printDataPasien(pasien);
+                    }
+                    System.out.println("\n");
+                    break;
+
+                case 6:
+                    // Print Data Pasien dengan NoPasien ke atas
+                    System.out.print("Masukkan NoPasien untuk print ke atas: ");
+                    int printNoPasien = scanner.nextInt();
+                    printDataPasienAbove(dataPasienMap, printNoPasien);
+                    break;
+
+                case 7:
+                    System.out.println("Terima kasih!");
+                    System.out.println("\n");
+                    break;
+
                 default:
+                    System.out.println("Pilihan tidak valid. Pilih 1-7.");
+                    System.out.println("\n");
                     break;
             }
-        } while (mainMenu != false);
+        } while (choice != 7);
     }
 
-    
-    //Method
-    public void addNewPatient(){
-        System.out.println("Masukkan nama Pasien: ");
-        String nama = inputData.next("");
-        System.out.println("Masukkan ID Pasien: ");
-        int ID = inputData.nextInt();
-        System.out.println("Masukkan diagnosa: ");
-        String diagnosa = inputData.next("");
-        System.out.println("Masukkan lokasi kasur: ");
-        String lokasiKasur = inputData.next("");
-        Data.put(ID, new DataPasien(ID, nama, diagnosa, lokasiKasur));
+    private static void printDataPasien(DataPasien pasien) {
+        System.out.println("Nama Pasien: " + pasien.getNamaPasien());
+        System.out.println("No Pasien: " + pasien.getNoPasien());
+        System.out.println("Diagnosa: " + pasien.getDiagnosa());
+        System.out.println("Lokasi Kasur: " + pasien.getLokasiKasur());
+        System.out.println("-----------------------");
     }
-    
-    public void deletePatient(){
-        System.out.println("Masukkan ID Pasien: ");
-        int ID = inputData.nextInt();
-        Data.remove(ID);
-    }
-    
-    public void searchID(){
-        
-    }  
 
-    public void searchName(){
-        
+    private static void printDataPasienAbove(TreeMap<Integer, DataPasien> dataPasienMap, int noPasien) {
+        boolean dataFound = false;
+        for (Map.Entry<Integer, DataPasien> entry : dataPasienMap.entrySet()) {
+            if (entry.getKey() >= noPasien) {
+                printDataPasien(entry.getValue());
+                dataFound = true;
+            }
+        }
+        if (!dataFound) {
+            System.out.println("Tidak ada Data Pasien dengan NoPasien " + noPasien + " ke atas.");
+            System.out.println("\n");
+        }
     }
 }

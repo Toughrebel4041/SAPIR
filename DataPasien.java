@@ -1,48 +1,38 @@
+/* Raihan Sultan Pasha Basuki
+ * SAPIR Project (Sistem Administrasi Pasien Rawat Inap)
+ * ESQ Business School | Computer Science 2022
+ * 2210130006
+ * Mata Kuliah: Algoritma dan Struktur Data
+ * Final Project
+ */
 import java.util.*;
-public class DataPasien {
-    public int NoPasien;
-    public String NamaPasien;
-    public String Diagnosa;
-    public String LokasiKasur;
 
-    public int getNoPasien() {
-        return NoPasien;
-    }
+class DataPasien {
+    private String NamaPasien;
+    private int NoPasien;
+    private String Diagnosa;
+    private String LokasiKasur;
 
-    public void setNoPasien(int NoPasien) {
-        NoPasien = NoPasien;
+    public DataPasien(String namaPasien, int noPasien, String diagnosa, String lokasiKasur) {
+        this.NamaPasien = namaPasien;
+        this.NoPasien = noPasien;
+        this.Diagnosa = diagnosa;
+        this.LokasiKasur = lokasiKasur;
     }
 
     public String getNamaPasien() {
         return NamaPasien;
     }
 
-    public void setNamaPasien(String NamaPasien) {
-        NamaPasien = NamaPasien;
+    public int getNoPasien() {
+        return NoPasien;
     }
 
     public String getDiagnosa() {
         return Diagnosa;
     }
 
-    public void setDiagnosa(String Diagnosa) {
-        Diagnosa = Diagnosa;
-    }
-
     public String getLokasiKasur() {
         return LokasiKasur;
     }
-
-    public void setLokasiKasur(String LokasiKasur) {
-        LokasiKasur = LokasiKasur;
-    }
-
-    public DataPasien(int NoPasien, String NamaPasien, String Diagnosa, String LokasiKasur){
-        this.NoPasien = NoPasien;
-        this.NamaPasien = NamaPasien;
-        this.Diagnosa = Diagnosa;
-        this.LokasiKasur = LokasiKasur;
-    }
-
-    
 }
