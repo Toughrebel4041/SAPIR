@@ -29,6 +29,7 @@ public class Main {
             choice = scanner.nextInt();
             System.out.println("\n");
 
+            //Methode
             switch (choice) {
                 case 1:
                     // Cari data pasien dengan NoPasien
@@ -47,7 +48,7 @@ public class Main {
                 case 2:
                     // Cari data pasien dengan NamaPasien
                     System.out.print("Masukkan NamaPasien: ");
-                    scanner.nextLine(); // Consume newline character
+                    scanner.nextLine();
                     String searchNamaPasien = scanner.nextLine();
                     boolean dataFound = false;
                     for (DataPasien pasien : dataPasienMap.values()) {
@@ -67,12 +68,12 @@ public class Main {
                     // Tambah Data Pasien Baru
                     System.out.println("Masukkan data pasien baru:");
                     System.out.print("Nama Pasien: ");
-                    scanner.nextLine(); // Consume newline character
+                    scanner.nextLine();
                     String newNamaPasien = scanner.nextLine();
                     System.out.print("No Pasien: ");
                     int newNoPasien = scanner.nextInt();
                     System.out.print("Diagnosa: ");
-                    scanner.nextLine(); // Consume newline character
+                    scanner.nextLine();
                     String newDiagnosa = scanner.nextLine();
                     System.out.print("Lokasi Kasur: ");
                     String newLokasiKasur = scanner.nextLine();
@@ -84,7 +85,7 @@ public class Main {
                     break;
 
                 case 4:
-                    // Hapus Data Pasien Baru
+                    // Hapus Data Pasien
                     System.out.print("Masukkan NoPasien untuk menghapus: ");
                     int deleteNoPasien = scanner.nextInt();
                     DataPasien deletedPasien = dataPasienMap.remove(deleteNoPasien);
